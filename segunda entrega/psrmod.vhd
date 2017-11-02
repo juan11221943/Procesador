@@ -62,7 +62,7 @@ if (aluop="001110")or(aluop="010000")then
 		nzvc(2) <= '0';
 	end if;
 	nzvc(1) <= ((csr1(31) and omux(31) and (not result(31))) or ((not csr1(31)) and (not omux(31)) and result(31)));
-	nzvc(0) <= (csr1(31) and omux(31));
+	nzvc(0) <= (csr1(31) and omux(31)) or (not(result(31)) and (csr1(31) or omux(31)));
 end if;
 --subcc - subxcc
 if (aluop="010001")or(aluop="010011")then
@@ -73,7 +73,7 @@ if (aluop="010001")or(aluop="010011")then
 		nzvc(2) <= '0';
 	end if;
 	nzvc(1) <= ((csr1(31) and (not omux(31)) and (not result(31))) or ((not csr1(31)) and omux(31) and result(31)));
-	nzvc(0) <= ((not csr1(31)) and omux(31));
+	nzvc(0) <= ((not csr1(31)) and omux(31)) or (result(31) and ((not csr1(31)) or omux(31)));
 end if;
 --addx
 if (aluop="001111")then
